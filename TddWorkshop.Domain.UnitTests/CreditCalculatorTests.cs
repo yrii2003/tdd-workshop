@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using AutoFixture.Xunit2;
 using Bogus;
 using FsCheck.Xunit;
 using TddWorkshop.Domain.InstantCredit;
@@ -14,21 +15,35 @@ namespace TddWorkshop.Domain.Tests;
 public class CreditCalculatorTests
 {
     [Theory, ClassData(typeof(CreditCalculatorTestData))]
-    public void Calculate_A(CalculateCreditRequest request, bool hasCriminalRecord, int points)
+    public void Calculate_IsApproved_PointsCalculatedCorrectly(CalculateCreditRequest request, bool hasCriminalRecord, int points)
     {
         var res = CreditCalculator.Calculate(request, hasCriminalRecord);
         Assert.Equal(points, res.Points);
     }
+    
+    [Theory, AutoData]
+    public void Calculate_AutoData_PointsCalculatedCorrectly(CalculateCreditRequest request, bool hasCriminalRecord)
+    {
+        var response = CreditCalculator.Calculate(request, hasCriminalRecord);
+
+        if (!response.IsApproved)
+        {
+            Assert.True(response.Points < 80);
+        }
+
+        var rate = response.Points.ToInterestRate();
+        Assert.Equal(rate, response.InterestRate);
+    }
 
     [Property(Arbitrary = new[] { typeof(PostiveArbitraries) })]
-    public bool Calculate_IsSatisfiedEqualsPointsGreaterThan80(CalculateCreditRequest request, bool hasCriminalRecord)
+    public bool Calculate_IsApproved_PointsGreaterThan80(CalculateCreditRequest request, bool hasCriminalRecord)
     {
         var res = CreditCalculator.Calculate(request, hasCriminalRecord);
         return res.IsApproved == res.Points >= 80;
     }
 
     [Property(Arbitrary = new[] { typeof(PostiveArbitraries) })]
-    public bool Calculate_PercentCalculatedCorrectly(CalculateCreditRequest request, bool hasCriminalRecord)
+    public bool Calculate_InterestRateCalculatedCorrectly(CalculateCreditRequest request, bool hasCriminalRecord)
     {
         var response = CreditCalculator.Calculate(request, hasCriminalRecord);
 
@@ -37,8 +52,8 @@ public class CreditCalculatorTests
             return response.Points < 80;
         }
 
-        var percent = response.Points.ToInterestRate();
-        return response.InterestRate == percent;
+        var rate = response.Points.ToInterestRate();
+        return response.InterestRate == rate;
     }
 }
 
@@ -46,9 +61,14 @@ public class CreditCalculatorTestData : IEnumerable<object[]>
 {
     public IEnumerator<object[]> GetEnumerator()
     {
-        yield return new object[] 
+        yield return new object[] // 100 points - 12,5%
             { CreateRequest(30, ConsumerCredit, 1_000_001, Deposit.RealEstate, Employee, false), false, 100 };
-        
+
+        yield return new object[] // 85 points - 26%
+            { CreateRequest(30, ConsumerCredit, 1_000_001, Deposit.RealEstate, Employee, false), true, 85 };
+
+        yield return new object[] // 85 points - 26%
+            { CreateRequest(21, RealEstate, 5_000_001, Deposit.None, Unemployed, true), true, 16 };
         // yield return new object[] { CreateRequest(0, 100, false), true, 0 };
     }
 

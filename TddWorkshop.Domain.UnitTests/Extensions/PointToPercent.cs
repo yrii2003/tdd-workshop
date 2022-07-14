@@ -28,9 +28,8 @@ public static class PointToPercent
             index++;
         }
 
-        var percent = Percents[Percents.Keys.ElementAt(index)];
         return index != -1
-            ? percent
+            ? Percents[Percents.Keys.ElementAt(index)]
             : null;
     }
 }

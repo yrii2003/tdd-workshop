@@ -47,9 +47,9 @@ internal static class CreditCalculator
         _ => throw new ArgumentOutOfRangeException()
     };
 
-    private static int GetOtherCreditPoints(bool otherCredits, CreditGoal creditGoal)
+    private static int GetOtherCreditPoints(bool hasOtherCredits, CreditGoal creditGoal)
     {
-        if (!otherCredits)
+        if (!hasOtherCredits)
         {
             return creditGoal == CreditGoal.OnLending ? 0 : 15;
         }
@@ -66,7 +66,7 @@ internal static class CreditCalculator
         sumPoints += GetEmploymentPoints(request.CreditInfo.Employment, request.PersonalInfo.Age);
         sumPoints += GetCreditGoalPoints(request.CreditInfo.Goal);
         sumPoints += GetDepositPoints(request.CreditInfo.Deposit);
-        sumPoints += GetOtherCreditPoints(hasCriminalRecord, request.CreditInfo.Goal);
+        sumPoints += GetOtherCreditPoints(request.CreditInfo.HasOtherCredits, request.CreditInfo.Goal);
         sumPoints += GetSumPoints(request.CreditInfo.Sum);
 
         return new CalculateCreditResponse(sumPoints);

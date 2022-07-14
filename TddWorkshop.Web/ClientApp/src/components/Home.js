@@ -3,21 +3,6 @@ import {AutoForm} from "uniforms-material";
 import Ajv from 'ajv';
 import {JSONSchemaBridge} from 'uniforms-bridge-json-schema';
 
-// const schema = {
-//     title: 'Guest',
-//     type: 'object',
-//     properties: {
-//         firstName: {type: 'string', id: 'PersonalInfo_FirstName'},
-//         lastName: {type: 'string'},
-//         workExperience: {
-//             description: 'Work experience in years',
-//             type: 'integer',
-//             minimum: 0,
-//             maximum: 100,
-//         },
-//     },
-//     required: ['firstName', 'lastName'],
-// };
 
 function createValidator(schema, ajv) {
     const validator = ajv.compile(schema);
@@ -36,14 +21,17 @@ function adaptSchema(parameters){
         required: []
     };
     
-    for(let i = 0; i < parameters.length; i++){
-        const key = parameters[i].name.replace('.', '_');
-        schema.properties[key] = {
-            type: 'string',
-            id: key
-        };
+    const iKeys = Object.keys(parameters);
+    for(let i = 0; i < iKeys.length; i++) {
+        const jKeys = Object.keys(parameters[i]);
+        for (let j = 0; j < jKeys.length; j++) {
+            const key = i + '_' + j;
+            schema.properties[key] = {
+                type: 'string',
+                id: key
+            };
+        }
     }
-
     const ajv = new Ajv({allErrors: true, useDefaults: true});
     const schemaValidator = createValidator(schema, ajv);
     return new JSONSchemaBridge(schema, schemaValidator);
@@ -68,8 +56,13 @@ export function Home (){
         fetch(swaggerUrl)
             .then(response => response.json())
             .then(json => {
-                const parameters = json['components']['schemas']['CreditGoal'];
-                setSchema(adaptSchema(parameters));
+                const PersonalInfo = json['components']['schemas']['PersonalInfo'];
+                const CreditInfo = json['components']['schemas']['CreditInfo'];
+                const PassportInfo = json['components']['schemas']['PassportInfo'];
+
+                setSchema(adaptSchema({
+                    PersonalInfo, CreditInfo, PassportInfo
+                }));
             })
     }, []);
     

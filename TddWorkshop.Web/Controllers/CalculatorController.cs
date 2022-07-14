@@ -9,6 +9,7 @@ namespace TddWorkshop.Web.Controllers;
 public class CalculatorController : MediatRControllerBase
 {
     [HttpPost(nameof(Calculate))]
-    public Task<IActionResult> Calculate([FromBody] CalculateCreditRequest request) => 
-        this.WithValidator(request, Send);
+    public Task<CalculateCreditResponse> Calculate([FromBody] CalculateCreditRequest request) => Send(request);
+
+    // this.WithValidator(request, Send);
 }

@@ -6,7 +6,7 @@
 - Complete the first task, commit and push your implementation to "my-step-1"
 - Check the "step-1" branch and compare it to "my-step-1"
 - Create a new branch from the "my-step-1" branch; you can call it "my-step-2"
-- Repeat the process until you reach the end of this README file
+- Repeat the process until you reach the end of this README.md file
 
 # Requirements
 The bank needs an instant credit calculator. A bank employee must be able to fill out the form and get an instant resolution
@@ -38,6 +38,8 @@ to the rules below:
 |                 | 1.000.001 - 5.000.000  | 14                                                                                                                                  |
 |                 | 5.000.001 - 10.000.000 | 8                                                                                                                                   |
 
+Criminal record information will be available via calling 3rd party API which is not ready yet.  
+
 ## Interest rate based on points
 | Points | Interest rate |
 |--------|---------------|
@@ -52,29 +54,28 @@ to the rules below:
 # Steps
 ## Step 1
 - Implement ```CreditCalculator``` via ```CreditCalculatorTests```
-- Use ... datasets xUnit (control examples)
+- Use ```Bogus``` to generate test data
+- Use 3 datasets with xUnit (control examples)
 - Check coverage
+- Don't implement ```CalculateAsync```, implement ```Calculate``` instead
 
 ## Step 2
-- Use ```Bogus``` to generate test data
 - Use ```AutoFixture``` to generate test data
-
-## Step 3
 - Use ```FsCheck``` to improve coverage
 
-## Step 4
+## Step 3
 - Implement a request handler using ```MediatR```
 - Implement validators, using ```FluentValidator```
 
-## Step 5
+## Step 4
 - Use ```WebApplicationFactory``` to test validator
 - Introduce ```ICriminalRecordChecker``` interface
 - Use ```Moq``` to mock ```CriminalRecordChecker```
 
-## Step 6
+## Step 5
 - Implement View
 - Test View using ```WebDriver```
 
-## Step 7
+## Step 6
 - Replace View with React
 - Update e2e tests

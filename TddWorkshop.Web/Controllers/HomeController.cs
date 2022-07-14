@@ -27,9 +27,12 @@ public class HomeController : Controller
         {
             vResult.AddToModelState(ModelState, "");
         }
-
-        var result = await mediator.Send(request);
-        ViewBag.Result = result;
+        else
+        {
+            var result = await mediator.Send(request);
+            ViewBag.Result = result;
+        }
+        
         return View(request);
     }
     
