@@ -32,7 +32,7 @@ to the rules below:
 |                 | Car                    | - No older than three years - 8                                                                                                     |
 |                 |                        | - Older than three years - 3                                                                                                        |
 |                 | Guarantor              | 12                                                                                                                                  |
-| Other credits   | No                     | Credit goal = On-lending:<br/> - Yes 0<br/> - No - 15                                                                               |
+| Other credits   | No                     | Credit goal = On-lending:<br/> - Yes - 0<br/> - No - 15                                                                             |
 |                 | Yes                    | 0                                                                                                                                   |                                                                                                                                   
 | Sum             | 0 - 1.000.000          | 12                                                                                                                                  |
 |                 | 1.000.001 - 5.000.000  | 14                                                                                                                                  |
