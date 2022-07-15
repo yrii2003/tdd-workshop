@@ -30,9 +30,8 @@ public abstract class PageObjectBase
 
     protected virtual string Prefix => GetType().Name;
     
-    // Remove ToLowerCamelCase to make it work with MVC
     protected IWebElement ById(string name) 
-        => Driver.FindElement(By.Id($"{Prefix.ToLowerCamelCase()}_{name.ToLowerCamelCase()}"));
+        => Driver.FindElement(By.Id($"{Prefix}_{name}"));
     
     protected void FillIn(object obj)
     {
@@ -87,11 +86,11 @@ public abstract class PageObjectBase
             return dt.ToString("yyyy-MM-dd");
         }
         // Comment these lines to make MVC work
-        if (value.GetType().IsEnum)
-        {
-            return ((int)value).ToString();
-        }
-        
+        // if (value.GetType().IsEnum)
+        // {
+        //     return ((int)value).ToString();
+        // }
+        //
         return value.ToString();
     }
 }
