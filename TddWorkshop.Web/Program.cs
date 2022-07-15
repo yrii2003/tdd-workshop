@@ -22,11 +22,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICriminalRecordChecker, CriminalRecordChecker>();
 builder.Services.AddMediatR(typeof(CalculateCreditHandler));
-builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+// add to MediatR pipeline or use AddFluentValidation and ApiController attribute
+// builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 builder.Services.AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<CalculateCreditRequest>());
 
 var app = builder.Build();
-app.UseMiddleware<ExceptionMiddleware>();
+
+// use together with MediatR pipeline
+// app.UseMiddleware<ExceptionMiddleware>();
 
 if (!app.Environment.IsDevelopment())
 {

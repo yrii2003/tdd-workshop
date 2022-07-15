@@ -5,31 +5,18 @@ namespace TddWorkshop.Domain.Tests.Extensions;
 
 public static class PointToPercent
 {
-    private static Dictionary<int, decimal> Percents = new()
-    {
-        { 80, 30 },
-        { 84, 26 },
-        { 88, 22 },
-        { 92, 19 },
-        { 96, 15 },
-        { 100, 12.5m }
-    };
-
     public static decimal? ToInterestRate(this int points)
     {
-        var index = -1;
-        foreach (var kv in Percents)
+        return points switch
         {
-            if (kv.Key > points)
-            {
-                break;
-            }
-            
-            index++;
-        }
-
-        return index != -1
-            ? Percents[Percents.Keys.ElementAt(index)]
-            : null;
+            < 80 => null,
+            < 84 => 30,
+            < 88 => 26,
+            < 92 => 22,
+            < 96 => 19,
+            < 100 => 15,
+            100 => 12.5m,
+            _ => null
+        };
     }
 }

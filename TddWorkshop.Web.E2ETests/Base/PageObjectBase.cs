@@ -52,7 +52,14 @@ public abstract class PageObjectBase
                 var value = objProps[element.Key](obj);
                 if (value != null)
                 {
-                    element.Value(pageObject).SendKeys(value.ToString());
+                    var webElement = element.Value(pageObject);
+
+                    if (webElement.TagName == "input" && webElement.GetAttribute("type") != "checkbox"
+                        || webElement.TagName == "textarea")
+                    {
+                        webElement.Clear();
+                        webElement.SendKeys(value.ToString());
+                    }
                 }
             }
         }

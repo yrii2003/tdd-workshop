@@ -51,7 +51,5 @@ public class IntegrationTests: IClassFixture<TddWorkshopWebApplicationFactory>
             .PostAsync("Calculator/Calculate", JsonContent.Create(request));
         
         Assert.Equal(HttpStatusCode.BadRequest, res.StatusCode);
-
-        var content = await res.Content.ReadAsStringAsync();
     }
 }

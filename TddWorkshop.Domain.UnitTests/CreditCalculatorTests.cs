@@ -59,17 +59,19 @@ public class CreditCalculatorTests
 
 public class CreditCalculatorTestData : IEnumerable<object[]>
 {
+    public static readonly CalculateCreditRequest Maximum =
+        CreateRequest(30, ConsumerCredit, 1_000_001, Deposit.RealEstate, Employee, false);
+    
     public IEnumerator<object[]> GetEnumerator()
     {
         yield return new object[] // 100 points - 12,5%
-            { CreateRequest(30, ConsumerCredit, 1_000_001, Deposit.RealEstate, Employee, false), false, 100 };
+            { Maximum, false, 100 };
 
         yield return new object[] // 85 points - 26%
             { CreateRequest(30, ConsumerCredit, 1_000_001, Deposit.RealEstate, Employee, false), true, 85 };
 
-        yield return new object[] // 85 points - 26%
+        yield return new object[] // 16 points
             { CreateRequest(21, RealEstate, 5_000_001, Deposit.None, Unemployed, true), true, 16 };
-        // yield return new object[] { CreateRequest(0, 100, false), true, 0 };
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -77,7 +79,7 @@ public class CreditCalculatorTestData : IEnumerable<object[]>
         return GetEnumerator();
     }
 
-    private static CalculateCreditRequest CreateRequest(int age, CreditGoal goal, decimal sum,
+    public static CalculateCreditRequest CreateRequest(int age, CreditGoal goal, decimal sum,
         Deposit deposit, Employment employment, bool hasOtherCredits)
     {
         var faker = new Faker();

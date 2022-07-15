@@ -24,7 +24,6 @@ public class WebDriverFixture: IDisposable
             _driver?.Dispose();
             throw;
         }
-
     }
 
     ~WebDriverFixture()
@@ -36,6 +35,11 @@ public class WebDriverFixture: IDisposable
         }
     }
 
+    public void Refresh()
+    {
+        _driver.Navigate().GoToUrl(_driver.Url);
+    }
+    
     public void Dispose()
     {
         Dispose(true);

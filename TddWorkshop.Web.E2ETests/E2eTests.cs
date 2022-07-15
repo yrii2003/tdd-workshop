@@ -18,12 +18,14 @@ public class E2eTests: IClassFixture<WebDriverFixture>
         _fixture = fixture;
     }
 
-    [Theory, ClassData(typeof(CreditCalculatorTestData))]
-    public void CreditCalculatorForm_SendForm_ResponseReceived(CalculateCreditRequest request, 
-        bool hasCriminalRecord, int points)
+    [Fact]
+    public void CreditCalculatorForm_SendMaximumForm_GetMinimalInterestRate()
     {
+        var request = CreditCalculatorTestData.Maximum;
+        _fixture.Refresh();
         var page = _fixture.CreatePage<FormPage>();
         var result = page.Submit(request);
-        Assert.Equal(points.ToInterestRate().ToString(), result.InterestRate.Text);
+
+        Assert.Equal("12.5", result.InterestRate.Text);
     }
 }
