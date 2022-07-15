@@ -1,4 +1,4 @@
-# How to use this repository
+I# How to use this repository
 - Create a fork of the repository
 - Start with the "master" branch
 - Read the next two paragraphs (*Requirements* and *Step 1*) of this README.md file
@@ -32,7 +32,7 @@ to the rules below:
 |                 | Car                    | - No older than three years - 8                                                                                                     |
 |                 |                        | - Older than three years - 3                                                                                                        |
 |                 | Guarantor              | 12                                                                                                                                  |
-| Other credits   | No                     | Credit goal = On-lending:<br/> - Yes 0<br/> - No - 15                                                                               |
+| Other credits   | No                     | Credit goal = On-lending:<br/> - Yes - 0<br/> - No - 15                                                                             |
 |                 | Yes                    | 0                                                                                                                                   |                                                                                                                                   
 | Sum             | 0 - 1.000.000          | 12                                                                                                                                  |
 |                 | 1.000.001 - 5.000.000  | 14                                                                                                                                  |
@@ -52,6 +52,7 @@ Criminal record information will be available via calling 3rd party API which is
 | 100    | 12,5%         |
 
 # Steps
+![](https://miro.medium.com/max/1400/0*VjbieOROPmnqlGCw.png)
 ## Step 1
 - Implement ```CreditCalculator``` via ```CreditCalculatorTests```
 - Use ```Bogus``` to generate test data
