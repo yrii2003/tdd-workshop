@@ -21,7 +21,6 @@ if (isDevelopment)
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<ICriminalRecordChecker, CriminalRecordChecker>();
 
 var app = builder.Build();
 

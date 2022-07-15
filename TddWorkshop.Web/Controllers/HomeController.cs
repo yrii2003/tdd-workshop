@@ -29,8 +29,6 @@ public class HomeController : Controller
         }
         else
         {
-            var result = await mediator.Send(request);
-            ViewBag.Result = result;
         }
         
         return View(request);

@@ -1,6 +1,6 @@
 namespace TddWorkshop.Domain.InstantCredit;
 
-internal static class CreditCalculator
+internal class CreditCalculator
 {
     private static int GetAgePoints(int age, CreditInfo creditInfo)
     {
@@ -57,19 +57,14 @@ internal static class CreditCalculator
         return 0;
     }
 
-    public static CalculateCreditResponse Calculate(CalculateCreditRequest request, bool hasCriminalRecord)
+    protected Task<bool> HasCriminalRecordAsync()
     {
-        var sumPoints = 0;
-
-        sumPoints += GetAgePoints(request.PersonalInfo.Age, request.CreditInfo);
-        sumPoints += GetCriminalRecordPoints(hasCriminalRecord);
-        sumPoints += GetEmploymentPoints(request.CreditInfo.Employment, request.PersonalInfo.Age);
-        sumPoints += GetCreditGoalPoints(request.CreditInfo.Goal);
-        sumPoints += GetDepositPoints(request.CreditInfo.Deposit);
-        sumPoints += GetOtherCreditPoints(request.CreditInfo.HasOtherCredits, request.CreditInfo.Goal);
-        sumPoints += GetSumPoints(request.CreditInfo.Sum);
-
-        return new CalculateCreditResponse(sumPoints);
+        throw new NotImplementedException();
+    }
+    
+    public Task<CalculateCreditResponse> CalculateAsync(CalculateCreditRequest request)
+    {
+        throw new NotImplementedException();
     }
 
     private static int GetSumPoints(decimal sum) => sum switch

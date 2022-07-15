@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using AutoFixture.Xunit2;
@@ -14,11 +15,11 @@ namespace TddWorkshop.Domain.Tests;
 
 public class CreditCalculatorTests
 {
-    [Theory, ClassData(typeof(CreditCalculatorTestData))]
-    public void Calculate_IsApproved_PointsCalculatedCorrectly(CalculateCreditRequest request, bool hasCriminalRecord, int points)
+    [Fact(Skip = "Implement on Step 1")]
+    public void Calculate_IsApproved_PointsCalculatedCorrectly()
+    //CalculateCreditRequest request, bool hasCriminalRecord, int points)
     {
-        var res = CreditCalculator.Calculate(request, hasCriminalRecord);
-        Assert.Equal(points, res.Points);
+        throw new NotImplementedException();
     }
 }
 
@@ -47,11 +48,11 @@ public class CreditCalculatorTestData : IEnumerable<object[]>
     public static CalculateCreditRequest CreateRequest(int age, CreditGoal goal, decimal sum,
         Deposit deposit, Employment employment, bool hasOtherCredits)
     {
-        var faker = new Faker();
+        // var faker = new Faker();
         return new CalculateCreditRequest(
-            new PersonalInfo(age, faker.Person.FirstName, faker.Person.LastName),
+            new PersonalInfo(age, "", ""),
             new CreditInfo(goal, sum, deposit, employment, hasOtherCredits),
-            new PassportInfo("1234", "123456", faker.Date.Past(), faker.Company.CompanyName())
+            new PassportInfo("1234", "123456", DateTime.Now, "")
         );
     }
 }
