@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddWorkshop.Web", "TddWorkshop.Web\TddWorkshop.Web.csproj", "{600E0EE6-AFCF-4BE1-82AF-7899D2C2F16F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddWorkshop.Domain", "TddWorkshop.Domain\TddWorkshop.Domain.csproj", "{03109FF8-3169-495B-8CBB-7593D8930344}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddWorkshop.Domain.UnitTests", "TddWorkshop.Domain.UnitTests\TddWorkshop.Domain.UnitTests.csproj", "{40FF9241-0DA9-4734-A00C-7A1255149B9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddWorkshop.Web.IntegrationTests", "TddWorkshop.Web.IntegrationTests\TddWorkshop.Web.IntegrationTests.csproj", "{B7CE6E7F-9630-40F1-9F90-2BCCD9446EC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6EE4DCFD-917F-427F-ACD4-F268710E8F14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TddWorkshop.Web.E2ETests", "TddWorkshop.Web.E2ETests\TddWorkshop.Web.E2ETests.csproj", "{BD560EF4-9D9D-4BAE-B1CE-8266DEEE59AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "README", "README", "{C494F3DA-9104-453E-BF8C-CD324CF8FA24}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{600E0EE6-AFCF-4BE1-82AF-7899D2C2F16F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{600E0EE6-AFCF-4BE1-82AF-7899D2C2F16F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{600E0EE6-AFCF-4BE1-82AF-7899D2C2F16F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{600E0EE6-AFCF-4BE1-82AF-7899D2C2F16F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03109FF8-3169-495B-8CBB-7593D8930344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03109FF8-3169-495B-8CBB-7593D8930344}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03109FF8-3169-495B-8CBB-7593D8930344}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03109FF8-3169-495B-8CBB-7593D8930344}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40FF9241-0DA9-4734-A00C-7A1255149B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40FF9241-0DA9-4734-A00C-7A1255149B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40FF9241-0DA9-4734-A00C-7A1255149B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40FF9241-0DA9-4734-A00C-7A1255149B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7CE6E7F-9630-40F1-9F90-2BCCD9446EC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7CE6E7F-9630-40F1-9F90-2BCCD9446EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7CE6E7F-9630-40F1-9F90-2BCCD9446EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7CE6E7F-9630-40F1-9F90-2BCCD9446EC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD560EF4-9D9D-4BAE-B1CE-8266DEEE59AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD560EF4-9D9D-4BAE-B1CE-8266DEEE59AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD560EF4-9D9D-4BAE-B1CE-8266DEEE59AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD560EF4-9D9D-4BAE-B1CE-8266DEEE59AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{40FF9241-0DA9-4734-A00C-7A1255149B9F} = {6EE4DCFD-917F-427F-ACD4-F268710E8F14}
+		{B7CE6E7F-9630-40F1-9F90-2BCCD9446EC6} = {6EE4DCFD-917F-427F-ACD4-F268710E8F14}
+		{BD560EF4-9D9D-4BAE-B1CE-8266DEEE59AF} = {6EE4DCFD-917F-427F-ACD4-F268710E8F14}
+	EndGlobalSection
+EndGlobal
