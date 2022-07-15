@@ -48,7 +48,7 @@ public class CreditResult: PageObjectBase
 {
     public CreditResult(IWebDriver driver) : base(driver) { }
 
-    public IWebElement InterestRate => Driver.FindElement(By.Id("interest-rate"), 100500);
+    public IWebElement InterestRate => Driver.FindElement(By.Id("interest-rate"), 10);
 }
 
 public class PersonalInfo : PageObjectBase
