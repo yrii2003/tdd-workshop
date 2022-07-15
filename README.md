@@ -32,7 +32,7 @@ to the rules below:
 |                 | Car                    | - No older than three years - 8                                                                                                     |
 |                 |                        | - Older than three years - 3                                                                                                        |
 |                 | Guarantor              | 12                                                                                                                                  |
-| Other credits   | No                     | Credit goal = On-lending:<br/> - Yes 0<br/> - No - 15                                                                               |
+| Other credits   | No                     | Credit goal = On-lending:<br/> - Yes - 0<br/> - No - 15                                                                             |
 |                 | Yes                    | 0                                                                                                                                   |                                                                                                                                   
 | Sum             | 0 - 1.000.000          | 12                                                                                                                                  |
 |                 | 1.000.001 - 5.000.000  | 14                                                                                                                                  |
@@ -52,12 +52,14 @@ Criminal record information will be available via calling 3rd party API which is
 | 100    | 12,5%         |
 
 # Steps
+![](https://miro.medium.com/max/1400/0*VjbieOROPmnqlGCw.png)
 ## Step 1
 - Implement ```CreditCalculator``` via ```CreditCalculatorTests```
 - Use ```Bogus``` to generate test data
 - Use 3 datasets with xUnit (control examples)
 - Check coverage
 - Don't implement ```CalculateAsync```, implement ```Calculate``` instead
+- Introduce ```ICriminalRecordChecker``` interface
 
 ## Step 2
 - Use ```AutoFixture``` to generate test data
@@ -69,7 +71,6 @@ Criminal record information will be available via calling 3rd party API which is
 
 ## Step 4
 - Use ```WebApplicationFactory``` to test validator
-- Introduce ```ICriminalRecordChecker``` interface
 - Use ```Moq``` to mock ```CriminalRecordChecker```
 
 ## Step 5
