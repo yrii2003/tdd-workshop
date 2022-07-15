@@ -20,41 +20,6 @@ public class CreditCalculatorTests
         var res = CreditCalculator.Calculate(request, hasCriminalRecord);
         Assert.Equal(points, res.Points);
     }
-    
-    [Theory, AutoData]
-    public void Calculate_AutoData_PointsCalculatedCorrectly(CalculateCreditRequest request, bool hasCriminalRecord)
-    {
-        var response = CreditCalculator.Calculate(request, hasCriminalRecord);
-
-        if (!response.IsApproved)
-        {
-            Assert.True(response.Points < 80);
-        }
-
-        var rate = response.Points.ToInterestRate();
-        Assert.Equal(rate, response.InterestRate);
-    }
-
-    [Property(Arbitrary = new[] { typeof(PostiveArbitraries) })]
-    public bool Calculate_IsApproved_PointsGreaterThan80(CalculateCreditRequest request, bool hasCriminalRecord)
-    {
-        var res = CreditCalculator.Calculate(request, hasCriminalRecord);
-        return res.IsApproved == res.Points >= 80;
-    }
-
-    [Property(Arbitrary = new[] { typeof(PostiveArbitraries) })]
-    public bool Calculate_InterestRateCalculatedCorrectly(CalculateCreditRequest request, bool hasCriminalRecord)
-    {
-        var response = CreditCalculator.Calculate(request, hasCriminalRecord);
-
-        if (!response.IsApproved)
-        {
-            return response.Points < 80;
-        }
-
-        var rate = response.Points.ToInterestRate();
-        return response.InterestRate == rate;
-    }
 }
 
 public class CreditCalculatorTestData : IEnumerable<object[]>
