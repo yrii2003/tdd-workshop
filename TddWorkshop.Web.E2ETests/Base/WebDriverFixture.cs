@@ -19,7 +19,7 @@ public class WebDriverFixture: IDisposable
             _driver.Manage().Window.Maximize();
             _driver.Navigate().GoToUrl(BaseUrl);
         }
-        catch (WebDriverException e)
+        catch (WebDriverException)
         {
             _driver?.Dispose();
             throw;
