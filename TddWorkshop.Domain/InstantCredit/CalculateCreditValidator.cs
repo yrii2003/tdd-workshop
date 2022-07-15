@@ -6,9 +6,6 @@ public class CalculateCreditValidator: AbstractValidator<CalculateCreditRequest>
 {
     public CalculateCreditValidator()
     {
-        // RuleFor(x => x.CreditInfo).NotNull();
-        // RuleFor(x => x.PassportInfo).NotNull();
-        // RuleFor(x => x.PersonalInfo).NotNull();
     }
 }
 

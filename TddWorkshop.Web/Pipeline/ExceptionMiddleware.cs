@@ -42,15 +42,26 @@ internal sealed class ExceptionMiddleware : IMiddleware
     private static string GetTitle(Exception exception) =>
         exception switch
         {
-            ValidationException _ => "Validation failed",
+            ValidationException _ => "One or more validation errors occurred.",
             _ => "Server Error"
         };
-    private static IReadOnlyDictionary<string, string[]> GetErrors(Exception exception)
+    private static IReadOnlyDictionary<string, string[]>? GetErrors(Exception exception)
     {
-        IReadOnlyDictionary<string, string[]> errors = null;
+        IReadOnlyDictionary<string, string[]>? errors = null;
         if (exception is ValidationException validationException)
         {
-            errors = null;
+            errors = validationException
+                .Errors
+                .Where(x => x != null)
+                .GroupBy(
+                    x => x.PropertyName,
+                    x => x.ErrorMessage,
+                    (propertyName, errorMessages) => new
+                    {
+                        Key = propertyName,
+                        Values = errorMessages.Distinct().ToArray()
+                    })
+                .ToDictionary(x => x.Key, x => x.Values);
         }
         return errors;
     }
