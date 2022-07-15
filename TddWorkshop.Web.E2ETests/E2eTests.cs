@@ -19,7 +19,7 @@ public class E2eTests: IClassFixture<WebDriverFixture>
         _fixture = fixture;
     }
 
-    [Fact]
+    [Fact(Skip = "Implement on Step 5")]
     public void CreditCalculatorForm_SendMaximumForm_GetMinimalInterestRate()
     {
         throw new NotImplementedException();

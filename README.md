@@ -58,6 +58,7 @@ Criminal record information will be available via calling 3rd party API which is
 - Use 3 datasets with xUnit (control examples)
 - Check coverage
 - Don't implement ```CalculateAsync```, implement ```Calculate``` instead
+- Introduce ```ICriminalRecordChecker``` interface
 
 ## Step 2
 - Use ```AutoFixture``` to generate test data
@@ -69,7 +70,6 @@ Criminal record information will be available via calling 3rd party API which is
 
 ## Step 4
 - Use ```WebApplicationFactory``` to test validator
-- Introduce ```ICriminalRecordChecker``` interface
 - Use ```Moq``` to mock ```CriminalRecordChecker```
 
 ## Step 5

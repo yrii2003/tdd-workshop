@@ -11,5 +11,4 @@ public class CalculatorController : MediatRControllerBase
     [HttpPost(nameof(Calculate))]
     public Task<CalculateCreditResponse> Calculate([FromBody] CalculateCreditRequest request) => Send(request);
 
-    // this.WithValidator(request, Send);
 }

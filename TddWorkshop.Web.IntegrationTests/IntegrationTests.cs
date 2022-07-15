@@ -25,6 +25,10 @@ public class IntegrationTests: IClassFixture<TddWorkshopWebApplicationFactory>
     public async Task Calculate_CreditApproved_PointsCalculatedCorrectly(CalculateCreditRequest request, 
         bool hasCriminalRecord, int points)
     {
+        _factory.CriminalCheckerMock
+            .Setup(x => x.HasCriminalRecord(It.IsAny<PersonalInfo>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(hasCriminalRecord);
+        
         var res = await _factory
             .HttpClient
             .PostAsync("Calculator/Calculate", JsonContent.Create(request));
@@ -33,10 +37,7 @@ public class IntegrationTests: IClassFixture<TddWorkshopWebApplicationFactory>
         var content = await res.Content.ReadFromJsonAsync<CalculateCreditResponse>();
         
         Assert.Equal(points, content?.Points);
-        _factory.CriminalCheckerMock.Verify(x => x.HasCriminalRecord(
-                It.IsAny<PersonalInfo>(), 
-                It.IsAny<CancellationToken>()),
-            Times.Exactly(1));
+        _factory.VerifyHasCriminalRecordOnce();
     }
 
     [Fact]
