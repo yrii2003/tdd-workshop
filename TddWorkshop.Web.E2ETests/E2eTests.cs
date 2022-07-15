@@ -10,13 +10,13 @@ using Xunit;
 
 namespace TddWorkshop.Web.E2ETests;
 
-public class E2eTests: IClassFixture<WebDriverFixture>
+public class E2eTests//: IClassFixture<WebDriverFixture>
 {
     private readonly WebDriverFixture _fixture;
 
-    public E2eTests(WebDriverFixture fixture)
+    public E2eTests()//(WebDriverFixture fixture)
     {
-        _fixture = fixture;
+        // _fixture = fixture;
     }
 
     [Fact(Skip = "Implement on Step 5")]

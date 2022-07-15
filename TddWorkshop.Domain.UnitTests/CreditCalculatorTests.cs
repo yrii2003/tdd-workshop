@@ -15,7 +15,8 @@ namespace TddWorkshop.Domain.Tests;
 public class CreditCalculatorTests
 {
     [Theory, ClassData(typeof(CreditCalculatorTestData))]
-    public void Calculate_IsApproved_PointsCalculatedCorrectly(CalculateCreditRequest request, bool hasCriminalRecord, int points)
+    public void Calculate_IsApproved_PointsCalculatedCorrectly(CalculateCreditRequest request, bool hasCriminalRecord,
+        int points)
     {
         var res = CreditCalculator.Calculate(request, hasCriminalRecord);
         Assert.Equal(points, res.Points);
@@ -26,7 +27,7 @@ public class CreditCalculatorTestData : IEnumerable<object[]>
 {
     public static readonly CalculateCreditRequest Maximum =
         CreateRequest(30, ConsumerCredit, 1_000_001, Deposit.RealEstate, Employee, false);
-    
+
     public IEnumerator<object[]> GetEnumerator()
     {
         yield return new object[] // 100 points - 12,5%
