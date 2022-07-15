@@ -79,3 +79,8 @@ Criminal record information will be available via calling 3rd party API which is
 ## Step 6
 - Replace View with React
 - Update e2e tests
+
+## Honorable mentions
+- Pex/VSharp - symbolic execution
+- K6 - stress testing  
+- Stryker.NET - mutation testing

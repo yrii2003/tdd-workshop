@@ -30,7 +30,9 @@ public abstract class PageObjectBase
 
     protected virtual string Prefix => GetType().Name;
     
-    protected IWebElement ById(string name) => Driver.FindElement(By.Id($"{Prefix}_{name}"));
+    // Remove ToLowerCamelCase to make it work with MVC
+    protected IWebElement ById(string name) 
+        => Driver.FindElement(By.Id($"{Prefix.ToLowerCamelCase()}_{name.ToLowerCamelCase()}"));
     
     protected void FillIn(object obj)
     {
@@ -58,7 +60,7 @@ public abstract class PageObjectBase
                         || webElement.TagName == "textarea")
                     {
                         webElement.Clear();
-                        webElement.SendKeys(value.ToString());
+                        webElement.SendKeys(PrepareValue(value));
                     }
                 }
             }
@@ -76,7 +78,20 @@ public abstract class PageObjectBase
                 }
             }
         }
+    }
+
+    private static string? PrepareValue(object value)
+    {
+        if (value is DateTime dt)
+        {
+            return dt.ToString("yyyy-MM-dd");
+        }
+        // Comment these lines to make MVC work
+        if (value.GetType().IsEnum)
+        {
+            return ((int)value).ToString();
+        }
         
-        
+        return value.ToString();
     }
 }

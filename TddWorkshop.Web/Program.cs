@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using FluentValidation.AspNetCore;
 using MediatR;
 using TddWorkshop.Domain.InstantCredit;
@@ -17,7 +19,8 @@ if (isDevelopment)
     });
 }
 
-builder.Services.AddSingleton<ExceptionMiddleware>();
+// uncomment when using ValidationBehavior
+// builder.Services.AddSingleton<ExceptionMiddleware>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICriminalRecordChecker, CriminalRecordChecker>();

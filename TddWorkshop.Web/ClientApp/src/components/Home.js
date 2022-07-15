@@ -1,17 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {AutoForm} from "uniforms-material";
-import Ajv from 'ajv';
 import {JSONSchemaBridge} from 'uniforms-bridge-json-schema';
 
-
-function createValidator(schema, ajv) {
-    const validator = ajv.compile(schema);
-
-    return (model) => {
-        validator(model);
-        return validator.errors?.length ? {details: validator.errors} : null;
-    };
-}
 
 function adaptSchema(parameters){
     const schema = {
@@ -23,50 +13,84 @@ function adaptSchema(parameters){
     
     const iKeys = Object.keys(parameters);
     for(let i = 0; i < iKeys.length; i++) {
-        const jKeys = Object.keys(parameters[i]);
+        const jKeys = Object.keys(parameters[iKeys[i]].properties);
         for (let j = 0; j < jKeys.length; j++) {
-            const key = i + '_' + j;
+            const key = iKeys[i] + '_' + jKeys[j];
+            const type = parameters[iKeys[i]].properties[jKeys[j]].type ?? 'integer';
+            
             schema.properties[key] = {
-                type: 'string',
+                type: type,
                 id: key
             };
         }
     }
-    const ajv = new Ajv({allErrors: true, useDefaults: true});
-    const schemaValidator = createValidator(schema, ajv);
-    return new JSONSchemaBridge(schema, schemaValidator);
+
+    return new JSONSchemaBridge(schema, _ => {});
 }
 
 const baseUrl = 'https://localhost:5001';
 const swaggerUrl = baseUrl + '/swagger/v1/swagger.json';
 
-function onSubmit(data) {
+function onSubmit(data, setResponse) {
     console.log(data);
-    fetch(baseUrl + '/Calculator/Calculate', {method: 'POST', body: JSON.stringify(data)})
+    const json = {};
+    const keys = Object.keys(data);
+    for(let i = 0; i < keys.length; i++){
+        const parts = keys[i].split('_');
+        if(!json[parts[0]]){
+            json[parts[0]] = {};
+        }
+
+        json[parts[0]][parts[1]] = data[keys[i]];
+    }
+    
+    const params = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(json)
+    };
+
+    fetch(baseUrl + '/Calculator/Calculate', params)
         .then(response => response.json())
         .then(json => {
-            console.log(123)
+            setResponse(json);
         });
 }
 
 export function Home (){
     const [schema, setSchema] = useState(null);
+    const [response, setResponse] = useState(null);
     
     useEffect(() => {
         fetch(swaggerUrl)
             .then(response => response.json())
             .then(json => {
-                const PersonalInfo = json['components']['schemas']['PersonalInfo'];
-                const CreditInfo = json['components']['schemas']['CreditInfo'];
-                const PassportInfo = json['components']['schemas']['PassportInfo'];
+                const personalInfo = json['components']['schemas']['PersonalInfo'];
+                const creditInfo = json['components']['schemas']['CreditInfo'];
+                const passportInfo = json['components']['schemas']['PassportInfo'];
 
                 setSchema(adaptSchema({
-                    PersonalInfo, CreditInfo, PassportInfo
+                    personalInfo, creditInfo, passportInfo
                 }));
             })
     }, []);
     
-    return !schema 
-        ? <div>Loading</div>
-        : <AutoForm schema={schema} onSubmit={onSubmit}/>
+    return <div>
+        {!schema 
+            ? <div>Loading</div>
+            : <AutoForm schema={schema} onSubmit={data => onSubmit(data, setResponse)}/>}
+        {response != null 
+            ? <div>
+                <div>Is approved: {response.isApproved ? 'true' : 'false'}</div>
+                {
+                    response.isApproved
+                        ?<div>Interest rate: <span id="interest-rate">{response.interestRate}</span></div>
+                        : null}
+            </div> 
+            : null
+        }
+    </div>
 }

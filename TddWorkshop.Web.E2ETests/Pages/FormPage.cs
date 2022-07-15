@@ -1,5 +1,6 @@
-using JetBrains.Annotations;
+using System;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using TddWorkshop.Domain.InstantCredit;
 using TddWorkshop.Web.E2ETests.Base;
 
@@ -46,8 +47,8 @@ public class FormPage : PageBase
 public class CreditResult: PageObjectBase
 {
     public CreditResult(IWebDriver driver) : base(driver) { }
-    
-    public IWebElement InterestRate => Driver.FindElement(By.Id("interest-rate"));
+
+    public IWebElement InterestRate => Driver.FindElement(By.Id("interest-rate"), 100500);
 }
 
 public class PersonalInfo : PageObjectBase
