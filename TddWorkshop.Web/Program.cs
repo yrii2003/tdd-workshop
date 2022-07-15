@@ -19,21 +19,11 @@ if (isDevelopment)
     });
 }
 
-// uncomment when using ValidationBehavior
-// builder.Services.AddSingleton<ExceptionMiddleware>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICriminalRecordChecker, CriminalRecordChecker>();
-builder.Services.AddMediatR(typeof(CalculateCreditHandler));
-
-// add to MediatR pipeline or use AddFluentValidation and ApiController attribute
-// builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-builder.Services.AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<CalculateCreditRequest>());
 
 var app = builder.Build();
-
-// use together with MediatR pipeline
-// app.UseMiddleware<ExceptionMiddleware>();
 
 if (!app.Environment.IsDevelopment())
 {
