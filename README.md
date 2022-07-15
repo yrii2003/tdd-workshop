@@ -52,6 +52,7 @@ Criminal record information will be available via calling 3rd party API which is
 | 100    | 12,5%         |
 
 # Steps
+![](https://miro.medium.com/max/1400/0*VjbieOROPmnqlGCw.png)
 ## Step 1
 - Implement ```CreditCalculator``` via ```CreditCalculatorTests```
 - Use ```Bogus``` to generate test data
