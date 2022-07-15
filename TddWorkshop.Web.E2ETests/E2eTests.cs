@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using AutoFixture.Xunit2;
 using TddWorkshop.Domain.InstantCredit;
@@ -21,11 +22,6 @@ public class E2eTests: IClassFixture<WebDriverFixture>
     [Fact]
     public void CreditCalculatorForm_SendMaximumForm_GetMinimalInterestRate()
     {
-        var request = CreditCalculatorTestData.Maximum;
-        _fixture.Refresh();
-        var page = _fixture.CreatePage<FormPage>();
-        var result = page.Submit(request);
-
-        Assert.Equal("12.5", result.InterestRate.Text);
+        throw new NotImplementedException();
     }
 }

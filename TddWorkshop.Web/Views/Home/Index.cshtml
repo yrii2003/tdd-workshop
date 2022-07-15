@@ -1,37 +1,6 @@
 ﻿@using TddWorkshop.Domain.InstantCredit
 @model TddWorkshop.Domain.InstantCredit.CalculateCreditRequest
 
-@using (Html.BeginForm(FormMethod.Post))
-{
-    @if (Model != null && !ViewContext.ModelState.IsValid)
-    {
-        <div class="form-group alert-danger alert">
-            @Html.ValidationSummary()
-        </div>
-    }
-
-    <div class="form-group">
-        <h4>Personal Information</h4>
-        @Html.EditorFor(x => x.PersonalInfo)
-    </div>
-    
-    <div class="form-group">
-        <h4>Credit Information</h4>
-        @Html.EditorFor(x => x.CreditInfo)
-    </div>
-    
-    <div class="form-group">
-        <h4>Passport</h4>
-        @Html.EditorFor(x => x.PassportInfo)
-    </div>
-    <div><input type="submit" class="btn btn-success" value="Calculate"/></div>
-}
-
-@if(ViewBag.Result is CalculateCreditResponse response)
-{
-    <div>Is approved: @response.IsApproved</div>
-    @if (response.IsApproved)
-    {
-        <div>Interest rate: <span id="interest-rate">@response.InterestRate</span></div>
-    }
+@{
+    throw new NotImplementedException();
 }
