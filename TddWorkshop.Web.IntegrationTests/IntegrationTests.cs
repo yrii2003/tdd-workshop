@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Net.Http.Json;
 using System.Threading;
@@ -12,45 +13,25 @@ using Xunit;
 
 namespace TddWorkshop.Web.IntegrationTests;
 
-public class IntegrationTests: IClassFixture<TddWorkshopWebApplicationFactory>
+public class IntegrationTests//: IClassFixture<TddWorkshopWebApplicationFactory>
 {
     private readonly TddWorkshopWebApplicationFactory _factory;
 
-    public IntegrationTests(TddWorkshopWebApplicationFactory factory)
-    {
-        _factory = factory;
-    }
+    // public IntegrationTests(TddWorkshopWebApplicationFactory factory)
+    // {
+    //     _factory = factory;
+    // }
     
-    [Theory, ClassData(typeof(CreditCalculatorTestData))]
+    [Theory(Skip = "Implement on Step 4"), ClassData(typeof(CreditCalculatorTestData))]
     public async Task Calculate_CreditApproved_PointsCalculatedCorrectly(CalculateCreditRequest request, 
         bool hasCriminalRecord, int points)
     {
-        _factory.CriminalCheckerMock
-            .Setup(x => x.HasCriminalRecord(It.IsAny<PersonalInfo>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(hasCriminalRecord);
-        
-        var res = await _factory
-            .HttpClient
-            .PostAsync("Calculator/Calculate", JsonContent.Create(request));
-        
-        Assert.Equal(HttpStatusCode.OK, res.StatusCode);
-        var content = await res.Content.ReadFromJsonAsync<CalculateCreditResponse>();
-        
-        Assert.Equal(points, content?.Points);
-        _factory.VerifyHasCriminalRecordOnce();
+        throw new NotImplementedException();
     }
 
-    [Fact]
+    [Fact(Skip = "Implement on Step 4")]
     public async Task Calculate_WrongInput_ValidationFailed()
     {
-        var fixture = new Fixture();
-        fixture.Register(() => (Deposit) (-1));
-
-        var request = fixture.Create<CalculateCreditRequest>();
-        var res = await _factory
-            .HttpClient
-            .PostAsync("Calculator/Calculate", JsonContent.Create(request));
-        
-        Assert.Equal(HttpStatusCode.BadRequest, res.StatusCode);
+        throw new NotImplementedException();
     }
 }
