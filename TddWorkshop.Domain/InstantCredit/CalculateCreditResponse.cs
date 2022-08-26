@@ -1,6 +1,6 @@
 namespace TddWorkshop.Domain.InstantCredit;
 
-public record CalculateCreditResponse(int Points)
+public record CalculateCreditRespons(int Points)
 {
     public bool IsApproved => Points >= 80;
     

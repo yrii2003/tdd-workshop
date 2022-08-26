@@ -1,7 +1,15 @@
-namespace TddWorkshop.Domain.InstantCredit;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using TddWorkshop.Domain.InstantCredit;
 
-// public class CriminalRecordChecker
-// {
-//     public Task<bool> HasCriminalRecord(PersonalInfo record, CancellationToken cancellationToken) => 
-//         Task.FromResult(record.FirstName == "John" && record.LastName == "Snow");
-// }
+namespace TddWorkshop.Domain.InstantCredit
+{
+    public class CriminalRecordChecker : ICriminalRecordChecker
+    {
+        public Task<bool> HasCriminalRecordAsync(PassportInfo record, CancellationToken cancellationToken)
+        {
+            // return Task.FromResult(record.Series == "1234" && record.Number == "123456");
+            throw new NotImplementedException();
+        }
+    }
+}

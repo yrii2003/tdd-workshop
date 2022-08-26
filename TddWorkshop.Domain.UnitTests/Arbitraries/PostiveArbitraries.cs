@@ -12,4 +12,4 @@ public static class PostiveArbitraries
 
     [UsedImplicitly]
     public static Arbitrary<decimal> SumGenerator() => KeyValues<CreditInfo>.ToArbitrary(x => x.Sum);
-}
+} 

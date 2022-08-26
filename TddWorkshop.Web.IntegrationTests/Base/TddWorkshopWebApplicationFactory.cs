@@ -13,5 +13,30 @@ namespace TddWorkshop.Web.IntegrationTests.Base;
 
 public class TddWorkshopWebApplicationFactory: WebApplicationFactory<HomeController>
 {
+    public Mock<ICriminalRecordChecker> CriminalCheckerMock { get; } = new();
 
+    private int _index = 1;
+
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    {
+        builder.ConfigureTestServices(services =>
+        {
+            var descriptor =
+                new ServiceDescriptor(
+                    typeof(ICriminalRecordChecker),
+                    _ => CriminalCheckerMock.Object,
+                    ServiceLifetime.Singleton);
+
+            services.Replace(descriptor);
+        });
+    }
+
+    public void VerifiHas()
+    {
+        CriminalCheckerMock.Verify(x => x.HasCriminalRecordAsync(
+            It.IsAny<PassportInfo>(),
+            It.IsAny<CancellationToken>()
+            ), Times.Exactly(_index++)
+        );
+    }
 }

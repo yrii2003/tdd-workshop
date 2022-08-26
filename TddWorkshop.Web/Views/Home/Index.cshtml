@@ -1,6 +1,19 @@
 ﻿@using TddWorkshop.Domain.InstantCredit
 @model TddWorkshop.Domain.InstantCredit.CalculateCreditRequest
 
-@{
-    throw new NotImplementedException();
+@using (Html.BeginForm(HttpMethod.Post))
+{   
+    <h2>Cred Info</h2>
+    @Html.EditorFor(x => x.CreditInfo)
+
+    <h2>Passport Info</h2>
+    @Html.EditorFor(x => x.PassportInfo)
+
+    <h2>Pers Info</h2>
+    @Html.EditorFor(x => x.PersonalInfo)
+
+    <br/>
+
+    <div><input type="submit"/></div>
+
 }

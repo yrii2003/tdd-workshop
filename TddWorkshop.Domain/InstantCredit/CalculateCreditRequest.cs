@@ -6,7 +6,7 @@ public record CalculateCreditRequest (
     PersonalInfo PersonalInfo,
     CreditInfo CreditInfo,
     PassportInfo PassportInfo
-): IRequest<CalculateCreditResponse>;
+): IRequest<CalculateCreditRespons>;
 
 public record PassportInfo(string Series, string Number, DateTime IssueDate, string IssuedBy);
 

@@ -21,6 +21,9 @@ if (isDevelopment)
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ICriminalRecordChecker, CriminalRecordChecker>();
+builder.Services.AddMediatR(typeof(CalculateCreditHandler));
+builder.Services.AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<CalculateCreditHandler>());
 
 var app = builder.Build();
 
